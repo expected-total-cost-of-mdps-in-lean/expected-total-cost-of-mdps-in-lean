@@ -1,0 +1,590 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.CharP.Defs</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.CharP.Defs";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">CharP</span>.<span class="name">Defs</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/ULift.html">Mathlib.Data.ULift</a></li><li><a href="../../.././Mathlib/Algebra/Field/Basic.html">Mathlib.Algebra.Field.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Group/ULift.html">Mathlib.Algebra.Group.ULift</a></li><li><a href="../../.././Mathlib/Data/Int/ModEq.html">Mathlib.Data.Int.ModEq</a></li><li><a href="../../.././Mathlib/Data/Nat/Find.html">Mathlib.Data.Nat.Find</a></li><li><a href="../../.././Mathlib/Tactic/NormNum/Basic.html">Mathlib.Tactic.NormNum.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Group/Fin/Basic.html">Mathlib.Algebra.Group.Fin.Basic</a></li><li><a href="../../.././Mathlib/Data/Nat/Cast/Prod.html">Mathlib.Data.Nat.Cast.Prod</a></li><li><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html">Mathlib.Data.Nat.Prime.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.CharP.Defs" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#charP_iff"><span class="name">charP_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CharP"><span class="name">CharP</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.cast_eq_zero_iff'"><span class="name">CharP</span>.<span class="name">cast_eq_zero_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.cast_eq_zero_iff"><span class="name">CharP</span>.<span class="name">cast_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.congr"><span class="name">CharP</span>.<span class="name">congr</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.natCast_eq_natCast'"><span class="name">CharP</span>.<span class="name">natCast_eq_natCast'</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.cast_eq_zero"><span class="name">CharP</span>.<span class="name">cast_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.ofNat_eq_zero"><span class="name">CharP</span>.<span class="name">ofNat_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.natCast_eq_natCast_mod"><span class="name">CharP</span>.<span class="name">natCast_eq_natCast_mod</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.eq"><span class="name">CharP</span>.<span class="name">eq</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.ofCharZero"><span class="name">CharP</span>.<span class="name">ofCharZero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.natCast_eq_natCast"><span class="name">CharP</span>.<span class="name">natCast_eq_natCast</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.natCast_injOn_Iio"><span class="name">CharP</span>.<span class="name">natCast_injOn_Iio</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.intCast_injOn_Ico"><span class="name">CharP</span>.<span class="name">intCast_injOn_Ico</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.intCast_eq_zero_iff"><span class="name">CharP</span>.<span class="name">intCast_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.intCast_eq_intCast"><span class="name">CharP</span>.<span class="name">intCast_eq_intCast</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.intCast_eq_intCast_mod"><span class="name">CharP</span>.<span class="name">intCast_eq_intCast_mod</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.charP_to_charZero"><span class="name">CharP</span>.<span class="name">charP_to_charZero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.charP_zero_iff_charZero"><span class="name">CharP</span>.<span class="name">charP_zero_iff_charZero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.exists"><span class="name">CharP</span>.<span class="name">exists</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.exists_unique"><span class="name">CharP</span>.<span class="name">exists_unique</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar"><span class="name">ringChar</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.spec"><span class="name">ringChar</span>.<span class="name">spec</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.eq"><span class="name">ringChar</span>.<span class="name">eq</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.charP"><span class="name">ringChar</span>.<span class="name">charP</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.of_eq"><span class="name">ringChar</span>.<span class="name">of_eq</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.eq_iff"><span class="name">ringChar</span>.<span class="name">eq_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.dvd"><span class="name">ringChar</span>.<span class="name">dvd</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.eq_zero"><span class="name">ringChar</span>.<span class="name">eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#ringChar.Nat.cast_ringChar"><span class="name">ringChar</span>.<span class="name">Nat</span>.<span class="name">cast_ringChar</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.neg_one_ne_one"><span class="name">CharP</span>.<span class="name">neg_one_ne_one</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.charP_iff_charP"><span class="name">RingHom</span>.<span class="name">charP_iff_charP</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.cast_eq_mod"><span class="name">CharP</span>.<span class="name">cast_eq_mod</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.ringChar_zero_iff_CharZero"><span class="name">CharP</span>.<span class="name">ringChar_zero_iff_CharZero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.char_ne_one"><span class="name">CharP</span>.<span class="name">char_ne_one</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.char_is_prime_of_two_le"><span class="name">CharP</span>.<span class="name">char_is_prime_of_two_le</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.char_is_prime_or_zero"><span class="name">CharP</span>.<span class="name">char_is_prime_or_zero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.exists'"><span class="name">CharP</span>.<span class="name">exists'</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.char_is_prime_of_pos"><span class="name">CharP</span>.<span class="name">char_is_prime_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.CharOne.subsingleton"><span class="name">CharP</span>.<span class="name">CharOne</span>.<span class="name">subsingleton</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.false_of_nontrivial_of_char_one"><span class="name">CharP</span>.<span class="name">false_of_nontrivial_of_char_one</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.ringChar_ne_one"><span class="name">CharP</span>.<span class="name">ringChar_ne_one</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.nontrivial_of_char_ne_one"><span class="name">CharP</span>.<span class="name">nontrivial_of_char_ne_one</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.ringChar_of_prime_eq_zero"><span class="name">CharP</span>.<span class="name">ringChar_of_prime_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#CharP.charP_iff_prime_eq_zero"><span class="name">CharP</span>.<span class="name">charP_iff_prime_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Ring.two_ne_zero"><span class="name">Ring</span>.<span class="name">two_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Ring.neg_one_ne_one_of_char_ne_two"><span class="name">Ring</span>.<span class="name">neg_one_ne_one_of_char_ne_two</span></a></div><div class="nav_link"><a class="break_within" href="#Ring.eq_self_iff_eq_zero_of_char_ne_two"><span class="name">Ring</span>.<span class="name">eq_self_iff_eq_zero_of_char_ne_two</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.lcm.charP"><span class="name">Nat</span>.<span class="name">lcm</span>.<span class="name">charP</span></a></div><div class="nav_link"><a class="break_within" href="#Prod.charP"><span class="name">Prod</span>.<span class="name">charP</span></a></div><div class="nav_link"><a class="break_within" href="#Prod.charZero_of_left"><span class="name">Prod</span>.<span class="name">charZero_of_left</span></a></div><div class="nav_link"><a class="break_within" href="#Prod.charZero_of_right"><span class="name">Prod</span>.<span class="name">charZero_of_right</span></a></div><div class="nav_link"><a class="break_within" href="#ULift.charP"><span class="name">ULift</span>.<span class="name">charP</span></a></div><div class="nav_link"><a class="break_within" href="#MulOpposite.charP"><span class="name">MulOpposite</span>.<span class="name">charP</span></a></div><div class="nav_link"><a class="break_within" href="#Int.cast_injOn_of_ringChar_ne_two"><span class="name">Int</span>.<span class="name">cast_injOn_of_ringChar_ne_two</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.of_not_dvd"><span class="name">NeZero</span>.<span class="name">of_not_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#NeZero.not_char_dvd"><span class="name">NeZero</span>.<span class="name">not_char_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#CharZero.charZero_iff_forall_prime_ne_zero"><span class="name">CharZero</span>.<span class="name">charZero_iff_forall_prime_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Fin.charP"><span class="name">Fin</span>.<span class="name">charP</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Characteristic-of-semirings">Characteristic of semirings <a class="hover-link" href="#Characteristic-of-semirings">#</a></h1></div><div class="decl" id="charP_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#charP_iff"><span class="name">charP_iff</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">x</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">x</span></span></span></span></span></div></div></div></div><div class="decl" id="CharP"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP"><span class="name">CharP</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>The generator of the kernel of the unique homomorphism ℕ → R for a semiring R.</p><p><em>Warning</em>: for a semiring <code>R</code>, <code><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> R 0</code> and <code><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> R</code> need not coincide.</p><ul>
+<li><code><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> R 0</code> asks that only <code>0 : ℕ</code> maps to <code>0 : R</code> under the map <code>ℕ → R</code>;</li>
+<li><code><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> R</code> requires an injection <code>ℕ ↪ R</code>.</li>
+</ul><p>For instance, endowing <code>{0, 1}</code> with addition given by <code>max</code> (i.e. <code>1</code> is absorbing), shows that
+<code><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> {0, 1}</code> does not hold and yet <code><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> {0, 1} 0</code> does.
+This example is formalized in <code><a href="../../.././Counterexamples/CharPZeroNeCharZero.html">Counterexamples/CharPZeroNeCharZero.lean</a></code>.</p><ul class="structure_fields" id="CharP.mk"><li id="CharP.cast_eq_zero_iff'" class="structure_field"><div class="structure_field_info">cast_eq_zero_iff' : <span class="fn">∀ (<span class="fn">x</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">x</span></span></span></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-CharP" class="instances-list"></ul></details></div></div><div class="decl" id="CharP.cast_eq_zero_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.cast_eq_zero_iff'"><span class="name">CharP</span>.<span class="name">cast_eq_zero_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ {<span class="fn">inst</span> : <span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>} {<span class="fn">p</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>} [<span class="fn">self</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>] (<span class="fn">x</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="CharP.cast_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.cast_eq_zero_iff"><span class="name">CharP</span>.<span class="name">cast_eq_zero_iff</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="CharP.congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.congr"><span class="name">CharP</span>.<span class="name">congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">q</span></span></div></div></div></div><div class="decl" id="CharP.natCast_eq_natCast'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.natCast_eq_natCast'"><span class="name">CharP</span>.<span class="name">natCast_eq_natCast'</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Data/Nat/ModEq.html#Nat.ModEq">≡</a> <span class="fn">b</span> <a href="../../.././Mathlib/Data/Nat/ModEq.html#Nat.ModEq">[MOD</a> <span class="fn">p</span><a href="../../.././Mathlib/Data/Nat/ModEq.html#Nat.ModEq">]</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="CharP.cast_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.cast_eq_zero"><span class="name">CharP</span>.<span class="name">cast_eq_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="CharP.ofNat_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.ofNat_eq_zero"><span class="name">CharP</span>.<span class="name">ofNat_eq_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">p</span>.AtLeastTwo</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#OfNat.ofNat">OfNat.ofNat</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="CharP.natCast_eq_natCast_mod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.natCast_eq_natCast_mod"><span class="name">CharP</span>.<span class="name">natCast_eq_natCast_mod</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMod.hMod">%</a> <span class="fn">p</span>)</span></span></span></div></div></div></div><div class="decl" id="CharP.eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.eq"><span class="name">CharP</span>.<span class="name">eq</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(_hp : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(_hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span></div></div></div></div><div class="decl" id="CharP.ofCharZero"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.ofCharZero"><span class="name">CharP</span>.<span class="name">ofCharZero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">0</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CharP.natCast_eq_natCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.natCast_eq_natCast"><span class="name">CharP</span>.<span class="name">natCast_eq_natCast</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#IsRightCancelAdd">IsRightCancelAdd</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Data/Nat/ModEq.html#Nat.ModEq">≡</a> <span class="fn">b</span> <a href="../../.././Mathlib/Data/Nat/ModEq.html#Nat.ModEq">[MOD</a> <span class="fn">p</span><a href="../../.././Mathlib/Data/Nat/ModEq.html#Nat.ModEq">]</a></span></span></div></div></div></div><div class="decl" id="CharP.natCast_injOn_Iio"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.natCast_injOn_Iio"><span class="name">CharP</span>.<span class="name">natCast_injOn_Iio</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#IsRightCancelAdd">IsRightCancelAdd</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">Nat.cast</span> <span class="fn">(<a href="../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Iio">Set.Iio</a> <span class="fn">p</span>)</span></span></div></div></div></div><div class="decl" id="CharP.intCast_injOn_Ico"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.intCast_injOn_Ico"><span class="name">CharP</span>.<span class="name">intCast_injOn_Ico</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Int/Cast/Defs.html#AddGroupWithOne">AddGroupWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#IsRightCancelAdd">IsRightCancelAdd</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">Int.cast</span> <span class="fn">(<a href="../../.././Mathlib/Order/Interval/Set/Basic.html#Set.Ico">Set.Ico</a> <span class="fn">0</span> <span class="fn">↑<span class="fn">p</span></span>)</span></span></div></div></div></div><div class="decl" id="CharP.intCast_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.intCast_eq_zero_iff"><span class="name">CharP</span>.<span class="name">intCast_eq_zero_iff</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Int/Cast/Defs.html#AddGroupWithOne">AddGroupWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="CharP.intCast_eq_intCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.intCast_eq_intCast"><span class="name">CharP</span>.<span class="name">intCast_eq_intCast</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Int/Cast/Defs.html#AddGroupWithOne">AddGroupWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Data/Int/ModEq.html#Int.ModEq">≡</a> <span class="fn">b</span> <a href="../../.././Mathlib/Data/Int/ModEq.html#Int.ModEq">[ZMOD</a> <span class="fn">↑<span class="fn">p</span></span><a href="../../.././Mathlib/Data/Int/ModEq.html#Int.ModEq">]</a></span></span></div></div></div></div><div class="decl" id="CharP.intCast_eq_intCast_mod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.intCast_eq_intCast_mod"><span class="name">CharP</span>.<span class="name">intCast_eq_intCast_mod</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Int/Cast/Defs.html#AddGroupWithOne">AddGroupWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMod.hMod">%</a> <span class="fn">↑<span class="fn">p</span></span>)</span></span></span></div></div></div></div><div class="decl" id="CharP.charP_to_charZero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.charP_to_charZero"><span class="name">CharP</span>.<span class="name">charP_to_charZero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Int/Cast/Defs.html#AddGroupWithOne">AddGroupWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">0</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span></div></div></div></div><div class="decl" id="CharP.charP_zero_iff_charZero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.charP_zero_iff_charZero"><span class="name">CharP</span>.<span class="name">charP_zero_iff_charZero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Int/Cast/Defs.html#AddGroupWithOne">AddGroupWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span></span></div></div></div></div><div class="decl" id="CharP.exists"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.exists"><span class="name">CharP</span>.<span class="name">exists</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">p</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="CharP.exists_unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.exists_unique"><span class="name">CharP</span>.<span class="name">exists_unique</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃! <span class="fn">p</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>, <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="ringChar"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar"><span class="name">ringChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Nat">ℕ</a></div></div><p>Noncomputable function that outputs the unique characteristic of a semiring.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Classical.html#Classical.choose">Classical.choose</a> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-ringChar" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ringChar.spec"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.spec"><span class="name">ringChar</span>.<span class="name">spec</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="ringChar.eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.eq"><span class="name">ringChar</span>.<span class="name">eq</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[C : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="ringChar.charP"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.charP"><span class="name">ringChar</span>.<span class="name">charP</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ringChar.of_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.of_eq"><span class="name">ringChar</span>.<span class="name">of_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="ringChar.eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.eq_iff"><span class="name">ringChar</span>.<span class="name">eq_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="ringChar.dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.dvd"><span class="name">ringChar</span>.<span class="name">dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ringChar.eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.eq_zero"><span class="name">ringChar</span>.<span class="name">eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="ringChar.Nat.cast_ringChar"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar.Nat.cast_ringChar"><span class="name">ringChar</span>.<span class="name">Nat</span>.<span class="name">cast_ringChar</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="CharP.neg_one_ne_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.neg_one_ne_one"><span class="name">CharP</span>.<span class="name">neg_one_ne_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> <span class="fn">(<span class="fn">2</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">p</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">-<span class="fn">1</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="RingHom.charP_iff_charP"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#RingHom.charP_iff_charP"><span class="name">RingHom</span>.<span class="name">charP_iff_charP</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#DivisionRing">DivisionRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">K</span> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">L</span> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="CharP.cast_eq_mod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.cast_eq_mod"><span class="name">CharP</span>.<span class="name">cast_eq_mod</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HMod.hMod">%</a> <span class="fn">p</span>)</span></span></span></div></div></div></div><div class="decl" id="CharP.ringChar_zero_iff_CharZero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.ringChar_zero_iff_CharZero"><span class="name">CharP</span>.<span class="name">ringChar_zero_iff_CharZero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span></span></div></div></div></div><div class="decl" id="CharP.char_ne_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.char_ne_one"><span class="name">CharP</span>.<span class="name">char_ne_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hc : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="CharP.char_is_prime_of_two_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.char_is_prime_of_two_le"><span class="name">CharP</span>.<span class="name">char_is_prime_of_two_le</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hc : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="CharP.char_is_prime_or_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.char_is_prime_or_zero"><span class="name">CharP</span>.<span class="name">char_is_prime_or_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hc : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="CharP.exists'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.exists'"><span class="name">CharP</span>.<span class="name">exists'</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn">∃ (<span class="fn">p</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> <span class="fn">(<a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span>)</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span></span></span></span></div></div></div></div><div class="decl" id="CharP.char_is_prime_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.char_is_prime_of_pos"><span class="name">CharP</span>.<span class="name">char_is_prime_of_pos</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> <span class="fn">(<a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span>)</span></span></div></div></div></div><div class="decl" id="CharP.CharOne.subsingleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.CharOne.subsingleton"><span class="name">CharP</span>.<span class="name">CharOne</span>.<span class="name">subsingleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">R</span></span></div></div></div></div><div class="decl" id="CharP.false_of_nontrivial_of_char_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.false_of_nontrivial_of_char_one"><span class="name">CharP</span>.<span class="name">false_of_nontrivial_of_char_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#False">False</a></div></div></div></div><div class="decl" id="CharP.ringChar_ne_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.ringChar_ne_one"><span class="name">CharP</span>.<span class="name">ringChar_ne_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="CharP.nontrivial_of_char_ne_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.nontrivial_of_char_ne_one"><span class="name">CharP</span>.<span class="name">nontrivial_of_char_ne_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hv : <span class="fn"><span class="fn">v</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hr : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">v</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span></div></div></div></div><div class="decl" id="CharP.ringChar_of_prime_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.ringChar_of_prime_eq_zero"><span class="name">CharP</span>.<span class="name">ringChar_of_prime_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hprime : <span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp0 : <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="CharP.charP_iff_prime_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.charP_iff_prime_eq_zero"><span class="name">CharP</span>.<span class="name">charP_iff_prime_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Ring.two_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Ring.two_ne_zero"><span class="name">Ring</span>.<span class="name">two_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hR : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div><p>We have <code>2 ≠ 0</code> in a nontrivial ring whose characteristic is not <code>2</code>.</p></div></div><div class="decl" id="Ring.neg_one_ne_one_of_char_ne_two"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Ring.neg_one_ne_one_of_char_ne_two"><span class="name">Ring</span>.<span class="name">neg_one_ne_one_of_char_ne_two</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hR : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">-<span class="fn">1</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">1</span></span></div></div><p>Characteristic <code>≠ 2</code> and nontrivial implies that <code>-1 ≠ 1</code>.</p></div></div><div class="decl" id="Ring.eq_self_iff_eq_zero_of_char_ne_two"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Ring.eq_self_iff_eq_zero_of_char_ne_two"><span class="name">Ring</span>.<span class="name">eq_self_iff_eq_zero_of_char_ne_two</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hR : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">2</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p>Characteristic <code>≠ 2</code> in a domain implies that <code>-a = a</code> iff <code>a = 0</code>.</p></div></div><div class="decl" id="Nat.lcm.charP"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Nat.lcm.charP"><span class="name">Nat</span>.<span class="name">lcm</span>.<span class="name">charP</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">S</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">(<span class="fn">R</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">S</span>)</span> <span class="fn">(<span class="fn"><span class="fn">p</span>.lcm</span> <span class="fn">q</span>)</span></span></div></div><p>The characteristic of the product of rings is the least common multiple of the
+characteristics of the two rings.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Prod.charP"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Prod.charP"><span class="name">Prod</span>.<span class="name">charP</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">(<span class="fn">R</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">S</span>)</span> <span class="fn">p</span></span></div></div><p>The characteristic of the product of two rings of the same characteristic
+is the same as the characteristic of the rings</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Prod.charZero_of_left"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Prod.charZero_of_left"><span class="name">Prod</span>.<span class="name">charZero_of_left</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">(<span class="fn">R</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">S</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Prod.charZero_of_right"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Prod.charZero_of_right"><span class="name">Prod</span>.<span class="name">charZero_of_right</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">(<span class="fn">R</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">S</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ULift.charP"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#ULift.charP"><span class="name">ULift</span>.<span class="name">charP</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">(<a href="../../.././Init/Prelude.html#ULift">ULift.{u_2, u_1}</a>      <span class="fn">R</span>)</span> <span class="fn">p</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="MulOpposite.charP"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#MulOpposite.charP"><span class="name">MulOpposite</span>.<span class="name">charP</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn"><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Opposites.html#MulOpposite">ᵐᵒᵖ</a></span> <span class="fn">p</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Int.cast_injOn_of_ringChar_ne_two"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Int.cast_injOn_of_ringChar_ne_two"><span class="name">Int</span>.<span class="name">cast_injOn_of_ringChar_ne_two</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hR : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">Int.cast</span> <span class="fn">{<span class="fn">0</span>, <span class="fn">1</span>, <span class="fn">-<span class="fn">1</span></span>}</span></span></div></div><p>If two integers from <code>{0, 1, -1}</code> result in equal elements in a ring <code>R</code>
+that is nontrivial and of characteristic not <code>2</code>, then they are equal.</p></div></div><div class="decl" id="NeZero.of_not_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#NeZero.of_not_dvd"><span class="name">NeZero</span>.<span class="name">of_not_dvd</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="NeZero.not_char_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#NeZero.not_char_dvd"><span class="name">NeZero</span>.<span class="name">not_char_dvd</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Nat/Cast/Defs.html#AddMonoidWithOne">AddMonoidWithOne</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">k</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">k</span></span></span></div></div></div></div><div class="decl" id="CharZero.charZero_iff_forall_prime_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#CharZero.charZero_iff_forall_prime_ne_zero"><span class="name">CharZero</span>.<span class="name">charZero_iff_forall_prime_ne_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocRing">NonAssocRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">p</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span> → <span class="fn"><span class="fn">↑<span class="fn">p</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></span></span></div></div></div></div><div class="decl" id="Fin.charP"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/3ae6376f67d90e32a4dfbee23157ac3ac4b5508c/Mathlib/Algebra/CharP/Defs.lean">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/Defs.html#Fin.charP"><span class="name">Fin</span>.<span class="name">charP</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span> <span class="fn">n</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

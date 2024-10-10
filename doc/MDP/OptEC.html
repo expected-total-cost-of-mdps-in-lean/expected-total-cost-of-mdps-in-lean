@@ -1,0 +1,684 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href=".././style.css"></link><link rel="icon" href=".././favicon.svg"></link><link rel="mask-icon" href=".././favicon.svg" color="#000000"></link><link rel="prefetch" href=".././/declarations/declaration-data.bmp" as="image"></link><title>MDP.OptEC</title><script defer="true" src=".././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT=".././";</script><script>const MODULE_NAME="MDP.OptEC";</script><script type="module" src=".././jump-src.js"></script><script type="module" src=".././search.js"></script><script type="module" src=".././expand-nav.js"></script><script type="module" src=".././how-about.js"></script><script type="module" src=".././instances.js"></script><script type="module" src=".././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">MDP</span>.<span class="name">OptEC</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href=".././Init.html">Init</a></li><li><a href=".././MDP/Bellman.html">MDP.Bellman</a></li><li><a href=".././MDP/Paths/Sets.html">MDP.Paths.Sets</a></li><li><a href=".././Init/Data/List/Lemmas.html">Init.Data.List.Lemmas</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-MDP.OptEC" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Finset.sum_biUnion_attach"><span class="name">Finset</span>.<span class="name">sum_biUnion_attach</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.sum_Paths_n₀_eq_sum_succs_Paths_n₀"><span class="name">MDP</span>.<span class="name">sum_Paths_n₀_eq_sum_succs_Paths_n₀</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by"><span class="name">MDP</span>.<span class="name">Paths_n₀_by</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_Paths_n₀"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_Paths_n₀</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_length"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_length</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_first"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_first</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_second"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_second</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_tail_first"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_tail_first</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_reachable"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_reachable</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_DisjointOn"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_DisjointOn</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_Prob'"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_Prob'</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Paths_n₀_by_Prob"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_Prob</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Fin.zero_mul_prod"><span class="name">MDP</span>.<span class="name">Fin</span>.<span class="name">zero_mul_prod</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Path.take_0_eq_mk_single"><span class="name">MDP</span>.<span class="name">Path</span>.<span class="name">take_0_eq_mk_single</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'.ext_eq''"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">ext_eq''</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.Path.RProb'_Cost_eq_tail"><span class="name">MDP</span>.<span class="name">Path</span>.<span class="name">RProb'_Cost_eq_tail</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.sum_succs_univ₀_sum_Paths_n₀_by"><span class="name">MDP</span>.<span class="name">sum_succs_univ₀_sum_Paths_n₀_by</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.sum_Paths_n₀_by_tail_eq_sum_Paths_n₀"><span class="name">MDP</span>.<span class="name">sum_Paths_n₀_by_tail_eq_sum_Paths_n₀</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'.cast_s_succ'_specialize"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">cast_s_succ'_specialize</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'_inf_n_eq_n_succ"><span class="name">MDP</span>.<span class="name">RScheduler'_inf_n_eq_n_succ</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'.fixed"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">fixed</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'.fixed_specialize"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">fixed_specialize</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'_consume_act_inf"><span class="name">MDP</span>.<span class="name">RScheduler'_consume_act_inf</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'_inf_independent_sum"><span class="name">MDP</span>.<span class="name">RScheduler'_inf_independent_sum</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'_inf_independent_sum'"><span class="name">MDP</span>.<span class="name">RScheduler'_inf_independent_sum'</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.RScheduler'.split_inf"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">split_inf</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.inf_succs_univ₀_Paths_n₀_by_eq_Φ_inf_EC₀'"><span class="name">MDP</span>.<span class="name">inf_succs_univ₀_Paths_n₀_by_eq_Φ_inf_EC₀'</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.sup_inf_EC₀'_eq_Φ_sup_inf_EC₀'"><span class="name">MDP</span>.<span class="name">sup_inf_EC₀'_eq_Φ_sup_inf_EC₀'</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.sup_inf_EC₀'_eq_iSup_Φ"><span class="name">MDP</span>.<span class="name">sup_inf_EC₀'_eq_iSup_Φ</span></a></div><div class="nav_link"><a class="break_within" href="#MDP.sup_inf_EC₀'_eq_lfp_Φ"><span class="name">MDP</span>.<span class="name">sup_inf_EC₀'_eq_lfp_Φ</span></a></div></nav><main>
+<div class="decl" id="Finset.sum_biUnion_attach"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#Finset.sum_biUnion_attach"><span class="name">Finset</span>.<span class="name">sum_biUnion_attach</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">{ <span class="fn">x</span> : <span class="fn">α</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span> }</span> → <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf' : <span class="fn"><a href=".././MDP/Succs.html#DisjointOn">DisjointOn</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">{ <span class="fn">x</span> : <span class="fn">β</span> // <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">α</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span> }</span>), <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span> }</span> → <a href=".././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑ <span class="fn">x</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">S</span>.attach</span>.biUnion</span> <span class="fn">f</span>)</span>.attach</span>, <span class="fn"><span class="fn">g</span> <span class="fn">⟨<span class="fn">↑<span class="fn">x</span></span>, <span class="fn">⋯</span>⟩</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">x</span> ∈ <span class="fn"><span class="fn">S</span>.attach</span>, <span class="fn">∑ <span class="fn">y</span> ∈ <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span>.attach</span>, <span class="fn"><span class="fn">g</span> <span class="fn">⟨<span class="fn">↑<span class="fn">y</span></span>, <span class="fn">⋯</span>⟩</span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.sum_Paths_n₀_eq_sum_succs_Paths_n₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.sum_Paths_n₀_eq_sum_succs_Paths_n₀"><span class="name">MDP</span>.<span class="name">sum_Paths_n₀_eq_sum_succs_Paths_n₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑ <span class="fn">π</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.Paths_n₀</span> <span class="fn">s₀</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span>)</span>.attach</span>, <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">𝒮</span> <span class="fn">↑<span class="fn">π</span></span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.Cost</span> <span class="fn">cost</span></span></span></span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn">∑ <span class="fn">π</span> ∈ <span class="fn"><span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.succs_Paths_n₀">MDP.succs_Paths_n₀</a> <span class="fn">n</span> <span class="fn">s₀</span>)</span>.attach</span>, <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">𝒮</span> <span class="fn">↑<span class="fn">π</span></span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.Cost</span> <span class="fn">cost</span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by"><div class="def"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by"><span class="name">MDP</span>.<span class="name">Paths_n₀_by</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn"><span class="fn">M</span>.Path</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Mathlib/Data/Finset/Image.html#Finset.map">Finset.map</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">π</span> : <span class="fn">↑<span class="fn">(<a href=".././Init/Prelude.html#Membership.mem">Membership.mem</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.Paths_n₀</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">n</span>)</span>.val</span>)</span></span>) =&gt; <span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.prepend</span> <span class="fn">s₀</span> <span class="fn">⋯</span></span></span>, <span class="fn">inj'</span> := <span class="fn">⋯</span> }</span>
+    <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.Paths_n₀</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">n</span>)</span>.attach</span></span></span></li></ul></details><details id="instances-for-list-MDP.Paths_n₀_by" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MDP.Paths_n₀_by_Paths_n₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_Paths_n₀"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_Paths_n₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> <span class="fn">(fun (<span class="fn">π</span> : <span class="fn"><span class="fn">M</span>.Path</span>) =&gt; <span class="fn">∀ (<span class="fn">h</span> : <span class="fn"><span class="fn">1</span> <a href=".././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><span class="fn">π</span>.states</span>.length</span></span>), <span class="fn"><span class="fn"><span class="fn">π</span>[<span class="fn">1</span>]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">s'</span></span></span></span>)</span> <span class="fn">(<span class="fn"><span class="fn">M</span>.Paths_n₀</span> <span class="fn">s₀</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_length"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_length"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_length</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{π : <span class="fn"><span class="fn">M</span>.Path</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">π</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.states</span>.length</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">2</span></span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_first"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_first"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_first</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{π : <span class="fn"><span class="fn">M</span>.Path</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">π</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">π</span>.first</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">s₀</span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_second"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_second"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_second</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{π : <span class="fn"><span class="fn">M</span>.Path</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">π</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.states</span>[<span class="fn">1</span>]</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">s'</span></span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_tail_first"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_tail_first"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_tail_first</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{π : <span class="fn"><span class="fn">M</span>.Path</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">π</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.tail</span>.first</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">s'</span></span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_reachable"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_reachable"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_reachable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{π : <span class="fn"><span class="fn">M</span>.Path</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">π</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">π</span>.reachable_from</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_DisjointOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_DisjointOn"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_DisjointOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href=".././MDP/Succs.html#DisjointOn">DisjointOn</a> <span class="fn">(<span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span>)</span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_Prob'"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_Prob'"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_Prob'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn">M</span>.Scheduler'</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑ <span class="fn">π</span> ∈ <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.tail</span>.Prob'</span> <span class="fn">𝒮</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="MDP.Paths_n₀_by_Prob"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Paths_n₀_by_Prob"><span class="name">MDP</span>.<span class="name">Paths_n₀_by_Prob</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn">M</span>.Scheduler</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑ <span class="fn">π</span> ∈ <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.tail</span>.Prob</span> <span class="fn">𝒮</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="MDP.Fin.zero_mul_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Fin.zero_mul_prod"><span class="name">MDP</span>.<span class="name">Fin</span>.<span class="name">zero_mul_prod</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span></span> → <a href=".././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∏ <span class="fn">i</span> : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span></span>, <span class="fn"><span class="fn">f</span> <span class="fn">i</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">∏ <span class="fn">i</span> : <span class="fn"><a href=".././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>, <span class="fn"><span class="fn">f</span> <span class="fn">⟨<span class="fn"><span class="fn">↑<span class="fn">i</span></span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>, <span class="fn">⋯</span>⟩</span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.Path.take_0_eq_mk_single"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Path.take_0_eq_mk_single"><span class="name">MDP</span>.<span class="name">Path</span>.<span class="name">take_0_eq_mk_single</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">M</span>.Path</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.take</span> <span class="fn">0</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">{<span class="fn"><span class="fn">π</span>.first</span>}</span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'.ext_eq''"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'.ext_eq''"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">ext_eq''</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(π : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">𝒮</span>.ext</span> <span class="fn">(<a href=".././MDP/Paths.html#MDP.Path.mk_single">MDP.Path.mk_single</a> <span class="fn">M</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.states</span>.head</span> <span class="fn">⋯</span>)</span>)</span>)</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">𝒮</span>.ext</span> <span class="fn">{<span class="fn">s₀</span>}</span>)</span></span></span></div></div></div></div><div class="decl" id="MDP.Path.RProb'_Cost_eq_tail"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.Path.RProb'_Cost_eq_tail"><span class="name">MDP</span>.<span class="name">Path</span>.<span class="name">RProb'_Cost_eq_tail</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(π : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">𝒮</span> <span class="fn">↑<span class="fn">π</span></span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.Cost</span> <span class="fn">cost</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">↑<span class="fn">(<span class="fn">𝒮</span> <span class="fn">⟨<span class="fn">{<span class="fn">s₀</span>}</span>, <span class="fn">⋯</span>⟩</span>)</span></span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span> <span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.tail</span> <span class="fn">⋯</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">(<span class="fn"><span class="fn">cost</span> <span class="fn">s₀</span></span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">π</span>)</span>.tail</span>.Cost</span> <span class="fn">cost</span></span>)</span></span></span></div></div></div></div><div class="decl" id="MDP.sum_succs_univ₀_sum_Paths_n₀_by"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.sum_succs_univ₀_sum_Paths_n₀_by"><span class="name">MDP</span>.<span class="name">sum_succs_univ₀_sum_Paths_n₀_by</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(∑ <span class="fn">s'</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>,
+    <span class="fn">∑ <span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span> }</span>,
+      <span class="fn">match <span class="fn">x</span> with
+      | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">h</span>⟩</span> =&gt; <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">𝒮</span> <span class="fn">π</span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">π</span>.Cost</span> <span class="fn">cost</span></span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn">cost</span> <span class="fn">s₀</span></span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a>     <span class="fn">∑ <span class="fn">s'</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>,
+      <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">↑<span class="fn">(<span class="fn">𝒮</span> <span class="fn">⟨<span class="fn">{<span class="fn">s₀</span>}</span>, <span class="fn">⋯</span>⟩</span>)</span></span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a>         <span class="fn">∑ <span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span> }</span>,
+          <span class="fn">match <span class="fn">x</span> with
+          | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">h</span>⟩</span> =&gt; <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span> <span class="fn"><span class="fn">π</span>.tail</span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.tail</span>.Cost</span> <span class="fn">cost</span></span></span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.sum_Paths_n₀_by_tail_eq_sum_Paths_n₀"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.sum_Paths_n₀_by_tail_eq_sum_Paths_n₀"><span class="name">MDP</span>.<span class="name">sum_Paths_n₀_by_tail_eq_sum_Paths_n₀</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(∑ <span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span> }</span>,
+    <span class="fn">match <span class="fn">x</span> with
+    | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">h</span>⟩</span> =&gt; <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span> <span class="fn"><span class="fn">π</span>.tail</span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">π</span>.tail</span>.Cost</span> <span class="fn">cost</span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn">∑ <span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">n</span></span></span> }</span>,
+    <span class="fn">match <span class="fn">x</span> with
+    | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">h</span>⟩</span> =&gt; <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span> <span class="fn">π</span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">π</span>.Cost</span> <span class="fn">cost</span></span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'.cast_s_succ'_specialize"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'.cast_s_succ'_specialize"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">cast_s_succ'_specialize</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(𝒮' : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">n</span> <span class="fn">↑<span class="fn">s₀'</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">𝒮'</span>.cast_s_succ'</span> <span class="fn">s₀</span>)</span>.specialize</span> <span class="fn">s₀'</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">𝒮'</span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'_inf_n_eq_n_succ"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'_inf_n_eq_n_succ"><span class="name">MDP</span>.<span class="name">RScheduler'_inf_n_eq_n_succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">↑<span class="fn">s₀'</span></span>)</span></span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt; <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">(↑<span class="fn">s₀'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s₀'</span>)</span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'.fixed"><div class="def"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'.fixed"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">fixed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">n</span> <span class="fn">s₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">{ <span class="fn">x</span> : <span class="fn">Act</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.act₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">n</span> <span class="fn">s₀</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">𝒮</span>.fixed</span> <span class="fn">α</span> <span class="fn">⟨<span class="fn">π</span>, <span class="fn">hπ</span>⟩</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn"><span class="fn"><span class="fn">π</span>.states</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">[<span class="fn">s₀</span>]</span></span> then <span class="fn">⟨<span class="fn">↑<span class="fn">α</span></span>, <span class="fn">⋯</span>⟩</span> else <span class="fn"><span class="fn">𝒮</span> <span class="fn">⟨<span class="fn">π</span>, <span class="fn">hπ</span>⟩</span></span></span></span></li></ul></details><details id="instances-for-list-MDP.RScheduler'.fixed" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MDP.RScheduler'.fixed_specialize"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'.fixed_specialize"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">fixed_specialize</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href=".././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(𝒮 : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">{ <span class="fn">x</span> : <span class="fn">Act</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.act₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀' : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">𝒮</span>.fixed</span> <span class="fn">α</span>)</span>.specialize</span> <span class="fn">s₀'</span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s₀'</span></span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'_consume_act_inf"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'_consume_act_inf"><span class="name">MDP</span>.<span class="name">RScheduler'_consume_act_inf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.act₀</span> <span class="fn">s₀</span>)</span>.inf'</span> <span class="fn">⋯</span> <span class="fn">fun (<span class="fn">α</span> : <span class="fn">Act</span>) =&gt;
+    <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+      <span class="fn">∑ <span class="fn">s'</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span>)</span>.attach</span>, <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">α</span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span></span></span></span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+    <span class="fn">∑ <span class="fn">s'</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span>)</span>.attach</span>, <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">↑<span class="fn">(<span class="fn">𝒮</span> <span class="fn">⟨<span class="fn">{<span class="fn">s₀</span>}</span>, <span class="fn">⋯</span>⟩</span>)</span></span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'_inf_independent_sum"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'_inf_independent_sum"><span class="name">MDP</span>.<span class="name">RScheduler'_inf_independent_sum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn">(<span class="fn">s'</span> : <span class="fn">State</span>) → <span class="fn"><span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">n</span> <span class="fn">s'</span></span> → <a href=".././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) (<span class="fn">s'</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>) (<span class="fn">π'</span> : <span class="fn"><span class="fn">M</span>.Path</span>) (<span class="fn">h</span> : <span class="fn"><span class="fn"><span class="fn">π'</span>.first</span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">s'</span></span></span>),
+  <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">π'</span>.prepend</span> <span class="fn">s₀</span> <span class="fn">⋯</span>)</span>[<span class="fn">1</span>]</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.Pathsable_list</span> <span class="fn">n</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">π'</span>.prepend</span> <span class="fn">s₀</span> <span class="fn">⋯</span>)</span>[<span class="fn">1</span>]</span></span>) =&gt;
+      <span class="fn">match <span class="fn">x</span> with
+      | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">hπ</span>⟩</span> =&gt; <span class="fn">⟨<span class="fn">↑<span class="fn">(<span class="fn">𝒮</span> <span class="fn">⟨<span class="fn"><span class="fn"><span class="fn">π</span>.prepend</span> <span class="fn">s₀</span> <span class="fn">⋯</span></span>, <span class="fn">⋯</span>⟩</span>)</span></span>, <span class="fn">⋯</span>⟩</span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>     <span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">s'</span></span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.Pathsable_list</span> <span class="fn">n</span> <span class="fn">↑<span class="fn">s'</span></span></span>) =&gt;
+      <span class="fn">match <span class="fn">x</span> with
+      | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">hπ</span>⟩</span> =&gt; <span class="fn">⟨<span class="fn">↑<span class="fn">(<span class="fn">𝒮</span> <span class="fn">⟨<span class="fn"><span class="fn"><span class="fn">π</span>.prepend</span> <span class="fn">s₀</span> <span class="fn">⋯</span></span>, <span class="fn">⋯</span>⟩</span>)</span></span>, <span class="fn">⋯</span>⟩</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(∑ <span class="fn">s'</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>,
+    <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt; <span class="fn"><span class="fn">f</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">⟨<span class="fn">↑<span class="fn">s'</span></span>, <span class="fn">⋯</span>⟩</span>)</span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+    <span class="fn">∑ <span class="fn">s'</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>, <span class="fn"><span class="fn">f</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">⟨<span class="fn">↑<span class="fn">s'</span></span>, <span class="fn">⋯</span>⟩</span>)</span></span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'_inf_independent_sum'"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'_inf_independent_sum'"><span class="name">MDP</span>.<span class="name">RScheduler'_inf_independent_sum'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">Act</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(∑ <span class="fn">s'</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span>)</span>.attach</span>,
+    <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+      <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">α</span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">⟨<span class="fn">↑<span class="fn">s'</span></span>, <span class="fn">⋯</span>⟩</span>)</span></span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+    <span class="fn">∑ <span class="fn">s'</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span>)</span>.attach</span>, <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">α</span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">⟨<span class="fn">↑<span class="fn">s'</span></span>, <span class="fn">⋯</span>⟩</span>)</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.RScheduler'.split_inf"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.RScheduler'.split_inf"><span class="name">MDP</span>.<span class="name">RScheduler'</span>.<span class="name">split_inf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+    <span class="fn">∑ <span class="fn">s'</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span>)</span>.attach</span>, <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">↑<span class="fn">(<span class="fn">𝒮</span> <span class="fn">⟨<span class="fn">{<span class="fn">s₀</span>}</span>, <span class="fn">⋯</span>⟩</span>)</span></span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">(↑<span class="fn">s'</span>)</span> <span class="fn">(<span class="fn"><span class="fn">𝒮</span>.specialize</span> <span class="fn">s'</span>)</span></span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.act₀</span> <span class="fn">s₀</span>)</span>.inf'</span> <span class="fn">⋯</span> <span class="fn">fun (<span class="fn">α</span> : <span class="fn">Act</span>) =&gt;
+    <span class="fn">∑ <span class="fn">s'</span> ∈ <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span>)</span>.attach</span>, <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.P</span> <span class="fn">s₀</span> <span class="fn">α</span>)</span> <span class="fn">↑<span class="fn">s'</span></span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">↑<span class="fn">s'</span></span>)</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="MDP.inf_succs_univ₀_Paths_n₀_by_eq_Φ_inf_EC₀'"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.inf_succs_univ₀_Paths_n₀_by_eq_Φ_inf_EC₀'"><span class="name">MDP</span>.<span class="name">inf_succs_univ₀_Paths_n₀_by_eq_Φ_inf_EC₀'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">fun (<span class="fn">𝒮</span> : <span class="fn"><span class="fn"><span class="fn">M</span>.RScheduler'</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span></span>) =&gt;
+    <span class="fn">∑ <span class="fn">s'</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn">State</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.succs_univ₀</span> <span class="fn">s₀</span></span></span> }</span>,
+      <span class="fn">∑ <span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> : <span class="fn"><span class="fn">M</span>.Path</span> // <span class="fn"><span class="fn">x</span> <a href=".././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><span class="fn">M</span>.Paths_n₀_by</span> <span class="fn">n</span> <span class="fn">s₀</span> <span class="fn">s'</span></span></span> }</span>,
+        <span class="fn">match <span class="fn">x</span> with
+        | <span class="fn">⟨<span class="fn">π</span>, <span class="fn">h</span>⟩</span> =&gt; <span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.Path.RProb'">MDP.Path.RProb'</a> <span class="fn">𝒮</span> <span class="fn">π</span> <span class="fn">⋯</span></span> <a href=".././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">π</span>.Cost</span> <span class="fn">cost</span></span></span></span></span></span></span>)</span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.Φ</span> <span class="fn">cost</span>)</span> <span class="fn">(fun (<span class="fn">s'</span> : <span class="fn">State</span>) =&gt; <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">s'</span>)</span></span>)</span> <span class="fn">s₀</span></span></span></div></div></div></div><div class="decl" id="MDP.sup_inf_EC₀'_eq_Φ_sup_inf_EC₀'"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.sup_inf_EC₀'_eq_Φ_sup_inf_EC₀'"><span class="name">MDP</span>.<span class="name">sup_inf_EC₀'_eq_Φ_sup_inf_EC₀'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href=".././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s₀ : <span class="fn">State</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">(<span class="fn">n</span> <a href=".././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span>)</span> <span class="fn">s₀</span>)</span></span> <a href=".././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.Φ</span> <span class="fn">cost</span>)</span> <span class="fn">(fun (<span class="fn">s'</span> : <span class="fn">State</span>) =&gt; <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">s'</span>)</span></span>)</span> <span class="fn">s₀</span></span></span></div></div></div></div><div class="decl" id="MDP.sup_inf_EC₀'_eq_iSup_Φ"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.sup_inf_EC₀'_eq_iSup_Φ"><span class="name">MDP</span>.<span class="name">sup_inf_EC₀'_eq_iSup_Φ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₀ : <span class="fn">State</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⨆ (<span class="fn">n</span> : <a href=".././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">s₀</span>)</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">M</span>.iSup_Φ</span> <span class="fn">cost</span> <span class="fn">s₀</span></span></span></div></div></div></div><div class="decl" id="MDP.sup_inf_EC₀'_eq_lfp_Φ"><div class="theorem"><div class="gh_link"><a href="https://github.com/expected-total-cost-of-mdps-in-lean/expected-total-cost-of-mdps-in-lean.github.io/blob/main/MDP/OptEC.lean">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href=".././MDP/OptEC.html#MDP.sup_inf_EC₀'_eq_lfp_Φ"><span class="name">MDP</span>.<span class="name">sup_inf_EC₀'_eq_lfp_Φ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{State : <a href=".././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Act : <a href=".././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href=".././MDP/Basic.html#MDP">MDP</a> <span class="fn">State</span> <span class="fn">Act</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">State</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">M</span>.FiniteBranching</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href=".././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Act</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(cost : <span class="fn"><span class="fn">M</span>.Costs</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">State</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⨆ (<span class="fn">n</span> : <a href=".././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href=".././MDP/Paths/Sets.html#MDP.RScheduler'.inf">MDP.RScheduler'.inf</a> <span class="fn">(<a href=".././MDP/Paths/Sets.html#MDP.EC₀'">MDP.EC₀'</a> <span class="fn">cost</span> <span class="fn">n</span> <span class="fn">s</span>)</span></span></span> <a href=".././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">M</span>.lfp_Φ</span> <span class="fn">cost</span> <span class="fn">s</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src=".././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
